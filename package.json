@@ -1,0 +1,28 @@
+{
+  "name": "unit-tests-examples",
+  "version": "1.0.0",
+  "description": "Unit test examples project",
+  "scripts": {
+    "start": "nodemon --watch src --exec ts-node src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "unit tests"
+  ],
+  "author": "Yuri Matin",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/hapi": "20.1.0",
+    "sqlite3": "5.0.1",
+    "uuid": "3.4.0"
+  },
+  "devDependencies": {
+    "@types/hapi__hapi": "20.0.5",
+    "@types/sqlite3": "3.1.7",
+    "@types/uuid": "^8.3.0",
+    "nodemon": "2.0.7",
+    "prettier": "2.2.1",
+    "ts-node": "9.1.1",
+    "typescript": "4.1.3"
+  }
+}
