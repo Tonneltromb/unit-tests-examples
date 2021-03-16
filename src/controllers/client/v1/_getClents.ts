@@ -1,6 +1,12 @@
-import { ServerRoute } from '@hapi/hapi';
-import { ClientsService } from '../../../services/clients';
+import { Request } from '@hapi/hapi';
 
-export const getClients: ServerRoute['handler'] = async (request) => {
-  return ClientsService.getList();
+import ClientsService from '../../../services/clients';
+import { WithPagination } from '../../../common/interfaces/pagination';
+
+export interface GetClientsRequest extends Request {
+  query: WithPagination;
+}
+
+export const getClients = async (request: GetClientsRequest) => {
+  return ClientsService.getList(request.query);
 };

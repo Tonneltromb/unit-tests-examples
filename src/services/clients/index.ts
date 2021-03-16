@@ -5,8 +5,9 @@ const sqlite = verbose();
 const db = new sqlite.Database('database.test');
 
 import { Client } from '../../models/Client';
+import { WithPagination } from '../../common/interfaces/pagination';
 
-const GET_ONE = 'SELECT * from clients';
+const GET_ONE = 'SELECT * from clients WHERE accountId = ?';
 const GET_LIST = 'SELECT * from clients';
 const CREATE = 'INSERT INTO clients VALUES($accountId, $firstName, $secondName, $nickname, $age)';
 const UPDATE = (updateDataString: string) => `UPDATE clients SET ${updateDataString} WHERE accountId = ?`;
@@ -19,18 +20,21 @@ const rejectIfError = (error: Error | null, reject: (reason: Error | null) => vo
   }
 };
 
-export const ClientsService = {
-  getOne: async (): Promise<Client | null> => {
+const ClientsService = {
+  getOne: async (accountId: string): Promise<Client | null> => {
     return new Promise((resolve, reject) => {
-      db.get(GET_ONE, (error: Error | null, row: Client) => {
+      db.get(GET_ONE, [accountId], (error: Error | null, row: Client) => {
         rejectIfError(error, reject);
         resolve(row || null);
       });
     });
   },
-  getList: async (): Promise<Client[]> => {
+  getList: async (query?: WithPagination): Promise<Client[]> => {
+    const { page = 0, size = 10 } = query || {};
+    let _preparedQuery = GET_LIST;
+    _preparedQuery += ` LIMIT ${size} OFFSET ${page * size}`;
     return new Promise((resolve, reject) => {
-      db.all(GET_LIST, (error: Error | null, row: Client[]) => {
+      db.all(_preparedQuery, (error: Error | null, row: Client[]) => {
         rejectIfError(error, reject);
         resolve(row);
       });
@@ -77,3 +81,5 @@ export const ClientsService = {
     });
   },
 };
+
+export default ClientsService;

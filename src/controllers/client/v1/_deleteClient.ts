@@ -1,6 +1,6 @@
 import { Request, ServerRoute } from '@hapi/hapi';
 
-import { ClientsService } from '../../../services/clients';
+import ClientsService from '../../../services/clients';
 import { Client } from '../../../models/Client';
 
 interface DeleteClientRequest extends Request {

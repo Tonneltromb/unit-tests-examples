@@ -1,6 +1,6 @@
 import { ServerRoute, Request } from '@hapi/hapi';
 
-import { ClientsService } from '../../../services/clients';
+import ClientsService from '../../../services/clients';
 import { Client } from '../../../models/Client';
 
 interface CreateClientRequest extends Request {

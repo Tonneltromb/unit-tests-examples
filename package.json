@@ -4,15 +4,19 @@
   "description": "Unit test examples project",
   "scripts": {
     "start": "nodemon --watch src --exec ts-node src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --bail --silent --noStackTrace --detectOpenHandles --logHeapUsage --runInBand --passWithNoTests"
   },
   "keywords": [
-    "unit tests"
+    "unit tests",
+    "hapi",
+    "jest",
+    "sqlite3"
   ],
   "author": "Yuri Matin",
   "license": "ISC",
   "dependencies": {
     "@hapi/hapi": "20.1.0",
+    "joi": "17.4.0",
     "sqlite3": "5.0.1",
     "uuid": "3.4.0"
   },
